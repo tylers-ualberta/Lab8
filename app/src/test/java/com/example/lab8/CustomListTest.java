@@ -72,6 +72,7 @@ public class CustomListTest {
     public void deleteCityTest() {
         list = MockCustomList();
         City city = MockCity();
+
         // Ensure exception is thrown
         assertThrows(IllegalArgumentException.class, () -> {
             list.deleteCity(city);
@@ -79,9 +80,31 @@ public class CustomListTest {
         int size = list.getCount();
         list.addCity(city);
         assertTrue(list.hasCity(city));
+
         // Check that city no longer exists in list, current size is initial size
         list.deleteCity(city);
         assertFalse(list.hasCity(city));
         assertEquals(list.getCount(), size);
+    }
+
+    /**
+     * Test the {@link CustomList#countCities} method. Ensure that count is
+     * initially 0 for empty list, and increases as we add cities, as well as
+     * decreases as we remove cities.
+     */
+    @Test
+    public void countCitiesTest() {
+        list = MockCustomList();
+        City city = MockCity();
+        City cityTwo = new City("St. Albert", "Alberta");
+        assertEquals(list.countCities(), 0);
+        list.add(city);
+        assertEquals(list.countCities(), 1);
+        list.add(cityTwo);
+        assertEquals(list.countCities(), 2);
+        list.deleteCity(cityTwo);
+        assertEquals(list.countCities(), 1);
+        list.deleteCity(city);
+        assertEquals(list.countCities(), 0);
     }
 }
