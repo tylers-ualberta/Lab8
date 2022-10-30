@@ -71,8 +71,18 @@ public class CustomList extends ArrayAdapter<City> {
         return false;
     }
 
+    /**
+     * A method to delete a {@link City} object, if it exists.
+     *
+     * @param city The candidate {@link City} to try and delete.
+     * @throws IllegalArgumentException if the candidate {@link City} does not
+     * exist.
+     */
     public void deleteCity(City city) {
-
+        if (!hasCity(city)) {
+            throw new IllegalArgumentException();
+        }
+        cities.remove(city);
     }
 
 }
