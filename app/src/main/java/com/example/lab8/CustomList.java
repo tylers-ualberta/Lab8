@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CustomList extends ArrayAdapter<City> {
 
@@ -53,7 +54,20 @@ public class CustomList extends ArrayAdapter<City> {
         cities.add(city);
     }
 
+    /**
+     * A method to check if the given {@link City} is in the cities list.
+     * Compares cities based on their city and province name.
+     *
+     * @param city The candidate {@link City} object.
+     * @return True if the {@link City} exists, false otherwise.
+     */
     public boolean hasCity(City city) {
+        for (City c : cities) {
+            if (c.getCityName().equals(city.getCityName()) &&
+                    c.getProvinceName().equals(city.getProvinceName())) {
+                return true;
+            }
+        }
         return false;
     }
 
