@@ -1,6 +1,7 @@
 package com.example.lab8;
 
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -60,5 +61,27 @@ public class CustomListTest {
         assertFalse(list.hasCity(city));
         list.addCity(city);
         assertTrue(list.hasCity(city));
+    }
+
+    /**
+     * Test the {@link CustomList#deleteCity} method. Ensure that the method
+     * throws an {@link IllegalArgumentException} for a non-existing {@link City}
+     * and that the object is deleted from the list.
+     */
+    @Test
+    public void deleteCityTest() {
+        list = MockCustomList();
+        City city = MockCity();
+        // Ensure exception is thrown
+        assertThrows(IllegalArgumentException.class, () -> {
+            list.deleteCity(city);
+        });
+        int size = list.getCount();
+        list.addCity(city);
+        assertTrue(list.hasCity(city));
+        // Check that city no longer exists in list, current size is initial size
+        list.deleteCity(city);
+        assertFalse(list.hasCity(city));
+        assertEquals(list.getCount(), size);
     }
 }
