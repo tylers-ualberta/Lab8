@@ -98,9 +98,9 @@ public class CustomListTest {
         City city = MockCity();
         City cityTwo = new City("St. Albert", "Alberta");
         assertEquals(list.countCities(), 0);
-        list.add(city);
+        list.addCity(city);
         assertEquals(list.countCities(), 1);
-        list.add(cityTwo);
+        list.addCity(cityTwo);
         assertEquals(list.countCities(), 2);
         list.deleteCity(cityTwo);
         assertEquals(list.countCities(), 1);
